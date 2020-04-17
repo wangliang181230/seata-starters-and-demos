@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    #自动生成表结构
+    initialization-mode: always
+    schema:
+      - classpath:sql/create_table.seata_at_tables.sql #创建AT模式所需的表：undo_log
+      - classpath:sql/create_table.seata_saga_tables.sql #创建SAGA模式所需的表：seata_state_machine_def、seata_state_machine_inst、seata_state_inst

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 以下两个xml由spring提供，在org.springframework.boot:spring-boot-2.x.x.RELEASE.jar里 -->
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+	<!-- 开启后可以通过jmx动态控制日志级别（SpringBoot Admin的功能） -->
+	<!--<jmxConfigurator/>-->
+
+	<!-- 日志变量 -->
+	<springProperty name="LOG_FILE" source="logging.file.name" defaultValue="spring"/>
+	<springProperty name="LOG_PATH" source="logging.file.path" defaultValue="logs"/>
+	<springProperty name="LOG_FILE_MAX_SIZE" source="logging.file.max-size" defaultValue="20MB"/>
+	<springProperty name="LOG_FILE_MAX_HISTORY" source="logging.file.max-history" defaultValue="0"/>
+
+	<!-- 默认日志级别 -->
+	<root level="INFO"/>
+	<!-- 自己项目的日志级别 -->
+	<logger name="com.easy.java" level="DEBUG"/>
+
+	<!-- ERROR级别日志 appender -->
+	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${LOG_PATH}/${LOG_FILE}.error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/daily/%d{yyyy-MM-dd}/${LOG_FILE}.error.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+			<maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+			<maxHistory>30</maxHistory><!--ERROR日志保留30天-->
+		</rollingPolicy>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- WARN级别日志 appender -->
+	<appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${LOG_PATH}/${LOG_FILE}.warn.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/daily/%d{yyyy-MM-dd}/${LOG_FILE}.warn.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+			<maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+			<maxHistory>20</maxHistory><!--WARN日志保留20天-->
+		</rollingPolicy>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- INFO级别日志 appender -->
+	<appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${LOG_PATH}/${LOG_FILE}.info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/daily/%d{yyyy-MM-dd}/${LOG_FILE}.info.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+			<maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+			<maxHistory>10</maxHistory><!--INFO日志保留10天-->
+		</rollingPolicy>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- DEBUG级别日志 appender -->
+	<appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${LOG_PATH}/${LOG_FILE}.debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/daily/%d{yyyy-MM-dd}/${LOG_FILE}.debug.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+			<maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+			<maxHistory>7</maxHistory><!--DEBUG日志保留7天-->
+		</rollingPolicy>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- TRACE级别日志 appender -->
+	<appender name="TRACE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>TRACE</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${LOG_PATH}/${LOG_FILE}.trace.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/daily/%d{yyyy-MM-dd}/${LOG_FILE}.trace.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+			<maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+			<maxHistory>3</maxHistory><!--TRACE日志保留3天-->
+		</rollingPolicy>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<root>
+		<!--控制台输出-->
+		<appender-ref ref="CONSOLE"/>
+		<!-- 文件输出 -->
+		<appender-ref ref="ERROR"/>
+		<appender-ref ref="INFO"/>
+		<appender-ref ref="WARN"/>
+		<appender-ref ref="DEBUG"/>
+		<appender-ref ref="TRACE"/>
+	</root>
+</configuration>

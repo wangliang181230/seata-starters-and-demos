@@ -1,0 +1,67 @@
+server:
+  port: 1002
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: demo1-application2
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/demo1-application2?autoReconnect=true&failOverReadOnly=false&useSSL=false&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    #自动生成表结构
+    initialization-mode: always
+    schema:
+      - classpath:sql/demo1-application2.sql
+      - classpath:sql/create_table.seata_at_tables.sql
+      - classpath:sql/create_table.seata_saga_tables.sql
+
+seata:
+  tx-service-group: test-group
+  service:
+    vgroup-mapping:
+      test-group: seata-server
+
+  #eureka注册中心
+  registry:
+    type: eureka
+    eureka:
+      service-url: http://127.0.0.1:8761/eureka
+      application: seata-server
+
+management:
+  server.port: 1${server.port:8080}
+  endpoints.web.exposure.include: "*"  #开放所有端点health，info，metrics，通过actuator/+端点名就可以获取相应的信息。默认打开health和info
+  endpoint.health.show-details: always #未开启actuator/health时，我们获取到的信息是{"status":"UP"}，status的值还有可能是 DOWN。开启后打印详细信息
+  server.ssl.enabled: false #默认：true
+
+eureka:
+  instance:
+    prefer-ip-address: true #true=使用IP地址注册|false=使用主机名注册，默认：false
+    ip-address: 127.0.0.1
+    lease-renewal-interval-in-seconds: 5 #心跳时间，即服务续约间隔时间，默认：30秒
+    lease-expiration-duration-in-seconds: 10 #发呆时间，即服务续约到期时间，默认：90秒
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+mybatis-plus:
+  mapper-locations:
+    - classpath*:mybatis/mapping/**/*Mapper.xml
+  global-config:
+    banner: false #是否打印LOGO（默认：true）
+    db-config:
+      #字段策略，可选值：ignored=忽略判断|not_null(默认)=非NULL判断|not-empty=非空判断（包括NULL和""）
+      insert-strategy: not_empty
+      #update-strategy: not_null #更新时，还是使用默认策略：not_null
+      select-strategy: not_empty
+  configuration:
+    map-underscore-to-camel-case: true #开启下划线转驼峰（默认值：false）
+    lazy-loading-enabled: true #延时加载的开关（默认值：false）
+
+info:
+  app:
+    code: ${spring.application.name}
+    name: 测试1-应用2

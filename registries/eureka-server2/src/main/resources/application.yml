@@ -1,0 +1,29 @@
+server:
+  port: 8761
+
+spring:
+  profiles:
+    active: dev #环境配置：使用maven命令打包时，命令后面加上“-P dev|test|prod”。
+  application:
+    name: eureka-server
+
+eureka:
+  server:
+    use-read-only-response-cache: false #缓存开关，true=开启（默认）、false=关闭
+    enable-self-preservation: false #自我保护机制，true=开启（默认）、false=关闭
+    eviction-interval-timer-in-ms: 5000 #清理无效节点的时间间隔，单位：毫秒，默认：60000毫秒（即：60秒）
+    #response-cache-auto-expiration-in-seconds: 60 #缓存过期时间，单位：秒，默认：180秒
+    #renewal-percent-threshold: 0.7 #指定每分钟需要收到的续约次数的阈值，默认值就是：0.85
+  client:
+    register-with-eureka: false #是否把自己注册到eureka服务器
+    fetch-registry: false #表示是否从eureka服务器获取注册信息
+    #service-url:
+    #  defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+### 当前应用信息
+info:
+  app:
+    code: ${spring.application.name}
+    name: eureka的SpringCloud注册中心
+    type: SpringCloudService
+    desc: 提供SpringCloud微服务提供者暴露服务的注册中心
