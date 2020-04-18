@@ -6,6 +6,7 @@ import com.easy.java.starter.seata.util.SeataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,12 +20,13 @@ import java.util.Map;
  * @date 2020/4/18 2:40
  */
 @RestController
+@RequestMapping("/test/at")
 public class TestAtController {
 
 	@Autowired
 	private TestTable2Mapper mapper;
 
-	@GetMapping("/test/insert/aaa")
+	@GetMapping("/insert/aaa")
 	//@Transactional // 不添加事务，与insertBbb()方法做对比
 	public long insertAaa(@RequestParam(required = false) Boolean throwException) {
 		TestTable2 entity = new TestTable2();
@@ -46,7 +48,7 @@ public class TestAtController {
 		return entity.getId();
 	}
 
-	@GetMapping("/test/insert/bbb")
+	@GetMapping("/insert/bbb")
 	@Transactional // 添加事务，当抛出异常时，当前分支事务将不会创建
 	public long insertBbb(@RequestParam(required = false) Boolean throwException) {
 		TestTable2 entity = new TestTable2();
@@ -69,7 +71,7 @@ public class TestAtController {
 	}
 
 
-	@GetMapping("/test/delete/aaa")
+	@GetMapping("/delete/aaa")
 	public void deleteAaa() {
 		SeataUtil.print("delete name=aaa");
 		Map<String, Object> params = new HashMap<>();
@@ -77,7 +79,7 @@ public class TestAtController {
 		mapper.deleteByMap(params);
 	}
 
-	@GetMapping("/test/delete/bbb")
+	@GetMapping("/delete/bbb")
 	public void deleteBbb() {
 		SeataUtil.print("delete name=bbb");
 		Map<String, Object> params = new HashMap<>();
@@ -85,7 +87,7 @@ public class TestAtController {
 		mapper.deleteByMap(params);
 	}
 
-	@GetMapping("/test/delete")
+	@GetMapping("/delete")
 	public void delete(@RequestParam Long id) {
 		SeataUtil.print("delete by id: " + id);
 		mapper.deleteById(id);

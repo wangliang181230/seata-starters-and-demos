@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Component
 @FeignClient("demo1-application2")
-@RequestMapping
-public interface Demo1Application2FeignClient {
+@RequestMapping("/test/at")
+public interface Demo1Application2AtControllerFeignClient {
 
-	@GetMapping("/test/insert/aaa")
+	@GetMapping("/insert/aaa")
 	long insertAaa(@RequestParam(required = false) Boolean throwException);
 
-	@GetMapping("/test/insert/bbb")
+	@GetMapping("/insert/bbb")
 	long insertBbb(@RequestParam(required = false) Boolean throwException);
 
-	@GetMapping("/test/delete/aaa")
+	@GetMapping("/delete/aaa")
 	void deleteAaa();
 
-	@GetMapping("/test/delete/bbb")
+	@GetMapping("/delete/bbb")
 	void deleteBbb();
 
-	@GetMapping("/test/delete")
+	@GetMapping("/delete")
 	void delete(long id);
 
 }

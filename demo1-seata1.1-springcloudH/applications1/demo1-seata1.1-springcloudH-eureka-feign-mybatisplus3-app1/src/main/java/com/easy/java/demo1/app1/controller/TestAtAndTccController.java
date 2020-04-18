@@ -2,6 +2,7 @@ package com.easy.java.demo1.app1.controller;
 
 import com.easy.java.demo1.app1.business.mapper.TestTable1Mapper;
 import com.easy.java.demo1.app1.consumer.Demo1Application2AtControllerFeignClient;
+import com.easy.java.demo1.app1.consumer.Demo1Application2TccControllerFeignClient;
 import com.easy.java.demo1.app1.domain.entity.TestTable1;
 import com.easy.java.starter.seata.util.SeataUtil;
 import io.seata.spring.annotation.GlobalTransactional;
@@ -11,20 +12,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 测试AT模式
+ * 测试AT+TCC混合模式
  *
  * @author wangliang <841369634@qq.com>
  * @date 2020/4/18 2:40
  */
 @RestController
-@RequestMapping("/test/at")
-public class TestAtController {
+@RequestMapping("/test/tcc")
+public class TestAtAndTccController {
 
 	@Autowired
 	private TestTable1Mapper mapper;
 
 	@Autowired
-	private Demo1Application2AtControllerFeignClient feignClient;
+	private Demo1Application2AtControllerFeignClient atFeignClient;
+	@Autowired
+	private Demo1Application2TccControllerFeignClient tccFeignClient;
 
 	@GlobalTransactional
 	@GetMapping("/success")
@@ -34,8 +37,10 @@ public class TestAtController {
 		mapper.insert(entity);
 		SeataUtil.print("insert xxx");
 
-		feignClient.insertAaa(false);
-		feignClient.insertBbb(false);
+		tccFeignClient.doBiz(5L); // 支付5元
+
+		atFeignClient.insertAaa(false);
+		atFeignClient.insertBbb(false);
 
 		return "测试成功";
 	}
@@ -48,8 +53,10 @@ public class TestAtController {
 		mapper.insert(entity);
 		SeataUtil.print("insert yyy");
 
-		feignClient.insertAaa(false);
-		feignClient.insertBbb(false);
+		tccFeignClient.doBiz(5L); // 支付5元
+
+		atFeignClient.insertAaa(false);
+		atFeignClient.insertBbb(false);
 
 		SeataUtil.print("当前服务自己故意抛异常");
 		throw new RuntimeException("当前服务自己故意抛异常");
@@ -63,8 +70,10 @@ public class TestAtController {
 		mapper.insert(entity);
 		SeataUtil.print("insert zzz");
 
-		feignClient.insertAaa(false);
-		feignClient.insertBbb(true); // 由微服务端抛出异常
+		tccFeignClient.doBiz(5L); // 支付5元
+
+		atFeignClient.insertAaa(false);
+		atFeignClient.insertBbb(true); // 由微服务端抛出异常
 	}
 
 }

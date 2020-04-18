@@ -6,6 +6,8 @@ spring:
     active: dev
   application:
     name: demo1-application2
+  main:
+    allow-bean-definition-overriding: true #允许多个消费者@FeignClient接口调用相同的提供者（即不同的消费者允许配置相同的@FeignClient的name），默认：false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/demo1-application2?autoReconnect=true&failOverReadOnly=false&useSSL=false&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
