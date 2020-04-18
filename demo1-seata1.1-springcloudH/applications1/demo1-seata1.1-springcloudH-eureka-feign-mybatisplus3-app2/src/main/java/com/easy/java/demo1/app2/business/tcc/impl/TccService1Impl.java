@@ -19,7 +19,8 @@ public class TccService1Impl implements TccService1 {
 
 	@Override
 	@Transactional // 一般情况下，此方法上会加本地事务，用于控制当前方法的事务一致性
-	public void doBiz(long payMoney) {
+	public void doBiz(BusinessActionContext businessActionContext,
+					  long payMoney) {
 		// 理论上，这里要对业务资源数据进行校验，并对资源进行预留操作，达到事务隔离性的目的。
 		SeataUtil.print("tcc service1 do biz: ");
 
@@ -82,7 +83,7 @@ public class TccService1Impl implements TccService1 {
 			SeataUtil.print(String.format("tcc: 全局事务失败，将上面冻结了的需支付金额恢复到余额: %d", payMoney));
 			lockMoney -= payMoney;
 			money += payMoney;
-			SeataUtil.print(String.format("tcc: 冻结金额已恢复到余额中，当前余额：%d, 当前冻结金额：%d", money, lockMoney));
+			SeataUtil.print(String.format("tcc: 冻结金额已恢复到余额中，当前余额：%d, 当前冻结金额：%d，请检查是否与diBiz方法中打印的值一致。", money, lockMoney));
 			return true;
 		} else {
 			String errorMsg = String.format("tcc: 冻结的金额数量不正确，冻结金额：%d, 需支付金额：%d，请检查你的代码是否正确", lockMoney, payMoney);

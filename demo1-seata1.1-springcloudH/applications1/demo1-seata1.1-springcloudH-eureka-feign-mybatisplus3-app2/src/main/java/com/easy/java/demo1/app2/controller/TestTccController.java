@@ -22,7 +22,7 @@ public class TestTccController {
 
 	@GetMapping("/doBiz")
 	public void doBiz(@RequestParam Long payMoney) {
-		tccService1.doBiz(payMoney);
+		tccService1.doBiz(null, payMoney);
 	}
 
 }

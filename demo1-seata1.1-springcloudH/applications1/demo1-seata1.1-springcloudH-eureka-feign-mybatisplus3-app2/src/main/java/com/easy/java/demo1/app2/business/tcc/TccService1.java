@@ -13,7 +13,8 @@ import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
 public interface TccService1 {
 
 	@TwoPhaseBusinessAction(name = "tccService1", commitMethod = "commit1", rollbackMethod = "rollback1")
-	void doBiz(@BusinessActionContextParameter(isShardingParam = true) long payMoney);
+	void doBiz(BusinessActionContext businessActionContext,
+			   @BusinessActionContextParameter(paramName = "payMoney", isShardingParam = true) long payMoney);
 
 	/**
 	 * 二阶段提交

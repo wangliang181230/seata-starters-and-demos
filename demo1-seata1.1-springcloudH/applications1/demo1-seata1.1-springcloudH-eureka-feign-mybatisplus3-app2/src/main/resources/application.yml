@@ -30,7 +30,7 @@ seata:
   registry:
     type: eureka
     eureka:
-      service-url: http://127.0.0.1:8761/eureka
+      service-url: ${eureka.client.service-url.defaultZone}
       application: seata-server
 
 management:
