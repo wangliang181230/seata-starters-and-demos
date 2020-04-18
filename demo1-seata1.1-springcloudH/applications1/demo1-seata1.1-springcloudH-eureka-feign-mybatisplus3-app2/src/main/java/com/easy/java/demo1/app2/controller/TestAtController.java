@@ -44,7 +44,7 @@ public class TestAtController {
 			throw new RuntimeException("由微服务提供者抛出异常，使全局事务回滚: insertAaa()");
 		}
 
-		SeataUtil.print("return aaa id");
+		SeataUtil.print("return aaa id: " + entity.getId());
 		return entity.getId();
 	}
 
@@ -66,7 +66,7 @@ public class TestAtController {
 			throw new RuntimeException("由微服务提供者抛出异常，使全局事务回滚: insertBbb()");
 		}
 
-		SeataUtil.print("return bbb id");
+		SeataUtil.print("return bbb id: " + entity.getId());
 		return entity.getId();
 	}
 
