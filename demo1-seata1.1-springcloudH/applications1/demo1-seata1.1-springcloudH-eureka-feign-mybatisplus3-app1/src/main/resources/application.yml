@@ -25,13 +25,14 @@ seata:
   service:
     vgroup-mapping:
       test-group: seata-server
-
   #eureka注册中心
   registry:
     type: eureka
     eureka:
       service-url: ${eureka.client.service-url.defaultZone}
       application: seata-server
+  saga.enabled: true #SAGA的开关，注意：SAGA启动的话，AT必须关闭，否则无法使用SAGA
+  enable-auto-data-source-proxy: false #AT的开关，默认：true
 
 
 management:

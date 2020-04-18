@@ -20,9 +20,14 @@ public class TestTccController {
 	@Autowired
 	private TccService1 tccService1;
 
-	@GetMapping("/doBiz")
-	public void doBiz(@RequestParam Long payMoney) {
-		tccService1.doBiz(null, payMoney);
+	@GetMapping("/dobiz/success")
+	public void doBizSuccess(@RequestParam Long payMoney) {
+		tccService1.doBiz(null, payMoney, false);
+	}
+
+	@GetMapping("/dobiz/error")
+	public void doBizError(@RequestParam Long payMoney) {
+		tccService1.doBiz(null, payMoney, true);
 	}
 
 }

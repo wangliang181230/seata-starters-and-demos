@@ -37,7 +37,7 @@ public class TestAtAndTccController {
 		mapper.insert(entity);
 		SeataUtil.print("insert xxx");
 
-		tccFeignClient.doBiz(5L); // 支付5元
+		tccFeignClient.doBizSuccess(5L); // 支付5元
 
 		atFeignClient.insertAaa(false);
 		atFeignClient.insertBbb(false);
@@ -53,7 +53,7 @@ public class TestAtAndTccController {
 		mapper.insert(entity);
 		SeataUtil.print("insert yyy");
 
-		tccFeignClient.doBiz(5L); // 支付5元
+		tccFeignClient.doBizSuccess(5L); // 支付5元
 
 		atFeignClient.insertAaa(false);
 		atFeignClient.insertBbb(false);
@@ -70,10 +70,10 @@ public class TestAtAndTccController {
 		mapper.insert(entity);
 		SeataUtil.print("insert zzz");
 
-		tccFeignClient.doBiz(5L); // 支付5元
-
 		atFeignClient.insertAaa(false);
-		atFeignClient.insertBbb(true); // 由微服务端抛出异常
+		atFeignClient.insertBbb(false);
+
+		tccFeignClient.duBizError(5L); // 支付5元, // 由微服务端抛出异常
 	}
 
 }

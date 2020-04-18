@@ -47,6 +47,11 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
+
 		<!--spring-cloud-alibaba-seata-->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>

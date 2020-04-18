@@ -1,3 +1,5 @@
+### seata的配置，为了简化项目中的配置，以及开发者所在公司在使用seata的习惯，在此配置文件中进行部分配置的默认值调整及新配置项添加。
+
 spring:
   datasource:
     #自动生成表结构
@@ -5,3 +7,15 @@ spring:
     schema:
       - classpath:sql/create_table.seata_at_tables.sql #创建AT模式所需的表：undo_log
       - classpath:sql/create_table.seata_saga_tables.sql #创建SAGA模式所需的表：seata_state_machine_def、seata_state_machine_inst、seata_state_inst
+
+seata:
+  #由于此属性不支持横杆模式，所以添加以下两项配置，让它在项目中支持横杆模式配置
+  enable-auto-data-source-proxy: true
+  enableAutoDataSourceProxy: ${seata.enable-auto-data-source-proxy}
+
+  #saga配置
+  saga:
+    state-machine:
+      enable-async: true #启用异步执行状态机（默认：false）
+      application-id: ${spring.application.name:}
+      tx-service-group: ${seata.tx-service-group:}

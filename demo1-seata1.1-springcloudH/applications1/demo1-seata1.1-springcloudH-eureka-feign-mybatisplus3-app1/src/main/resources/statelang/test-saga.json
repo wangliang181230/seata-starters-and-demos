@@ -1,0 +1,95 @@
+{
+	"Name": "testSaga",
+	"Comment": "test saga.",
+	"StartState": "Service1",
+	"Version": "0.0.1",
+	"States": {
+		"Service1": {
+			"Type": "ServiceTask",
+			"ServiceName": "sagaBizService1",
+			"ServiceMethod": "doBiz",
+			"CompensateState": "CompensateService1",
+			"Next": "Service2",
+			"Input": [],
+			"Output": {
+				"sagaBizService1Result": "$.#root"
+			},
+			"Status": {
+				"#root == true": "SU",
+				"#root == false": "FA",
+				"$Exception{java.lang.Throwable}": "UN"
+			},
+			"Retry": [
+				{
+					"Exceptions": [
+						"java.lang.Throwable"
+					],
+					"IntervalSeconds": 0.01,
+					"MaxAttempts": 2,
+					"BackoffRate": 1
+				}
+			],
+			"Catch": [
+				{
+					"Exceptions": [
+						"java.lang.Throwable"
+					],
+					"Next": "CompensationTrigger"
+				}
+			]
+		},
+		"Service2": {
+			"Type": "ServiceTask",
+			"ServiceName": "sagaBizService2",
+			"ServiceMethod": "doBiz",
+			"CompensateState": "CompensateService2",
+			"Next": "Succeed",
+			"Input": [
+				{
+					"doThrowException": "$.[throwException]"
+				}
+			],
+			"Output": {
+				"testSagaService2Result": "$.#root"
+			},
+			"Status": {
+				"#root == true": "SU",
+				"#root == false": "FA",
+				"$Exception{java.lang.Throwable}": "UN"
+			},
+			"Retry": [],
+			"Catch": [
+				{
+					"Exceptions": [
+						"java.lang.Throwable"
+					],
+					"Next": "CompensationTrigger"
+				}
+			]
+		},
+		"CompensateService1": {
+			"Type": "ServiceTask",
+			"ServiceName": "sagaBizService1",
+			"ServiceMethod": "compensate",
+			"Input": []
+		},
+		"CompensateService2": {
+			"Type": "ServiceTask",
+			"ServiceName": "sagaBizService2",
+			"ServiceMethod": "compensate",
+			"Input": []
+		},
+		"CompensationTrigger": {
+			"Type": "CompensationTrigger",
+			"Next": "Fail"
+		},
+		"Succeed": {
+			"Type": "Succeed"
+		},
+		"Fail": {
+			"Type": "Fail",
+			"ErrorCode": "1001",
+			"Message": "the saga transaction is error."
+		}
+	}
+}

@@ -1,4 +1,4 @@
-package com.easy.java.common;
+package com.easy.java.common.environmentpostprocessor;
 
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;

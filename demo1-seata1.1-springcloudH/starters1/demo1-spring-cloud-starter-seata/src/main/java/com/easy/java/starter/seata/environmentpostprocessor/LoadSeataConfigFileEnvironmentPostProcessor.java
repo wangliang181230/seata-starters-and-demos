@@ -1,6 +1,6 @@
 package com.easy.java.starter.seata.environmentpostprocessor;
 
-import com.easy.java.common.AbstractEnvironmentPostProcessor;
+import com.easy.java.common.environmentpostprocessor.AbstractEnvironmentPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.env.ConfigurableEnvironment;
 

@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/test/tcc")
 public interface Demo1Application2TccControllerFeignClient {
 
-	@GetMapping("/doBiz")
-	void doBiz(@RequestParam Long payMoney);
+	@GetMapping("/dobiz/success")
+	void doBizSuccess(@RequestParam Long payMoney);
+
+	@GetMapping("/dobiz/error")
+	void duBizError(@RequestParam Long payMoney);
 
 
 }
