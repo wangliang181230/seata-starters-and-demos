@@ -1,7 +1,8 @@
-package com.easy.java.demo1.app1.controller;
+package com.easy.java.demo1.app2.controller;
 
-import com.easy.java.demo1.app1.business.mapper.TestTable2Mapper;
-import com.easy.java.demo1.app1.domain.entity.TestTable2;
+import com.easy.java.demo1.app2.business.mapper.TestTable2Mapper;
+import com.easy.java.demo1.app2.domain.entity.TestTable2;
+import com.easy.java.starter.seata.util.SeataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +30,19 @@ public class TestAtController {
 		TestTable2 entity = new TestTable2();
 		entity.setName("aaa");
 		mapper.insert(entity);
+		SeataUtil.print("insert aaa");
+
+		TestTable2 entity2 = new TestTable2();
+		entity2.setName("aaaaaa");
+		mapper.insert(entity2);
+		SeataUtil.print("insert aaaaaa");
 
 		if (Boolean.TRUE.equals(throwException)) {
-			throw new RuntimeException("由微服务提供者抛出异常，使全局事务回滚: aaa");
+			SeataUtil.print("由微服务提供者抛出异常，使全局事务回滚: insertAaa()");
+			throw new RuntimeException("由微服务提供者抛出异常，使全局事务回滚: insertAaa()");
 		}
 
+		SeataUtil.print("return aaa id");
 		return entity.getId();
 	}
 
@@ -43,17 +52,26 @@ public class TestAtController {
 		TestTable2 entity = new TestTable2();
 		entity.setName("bbb");
 		mapper.insert(entity);
+		SeataUtil.print("insert bbb");
+
+		TestTable2 entity2 = new TestTable2();
+		entity2.setName("bbbbbb");
+		mapper.insert(entity2);
+		SeataUtil.print("insert bbbbbb");
 
 		if (Boolean.TRUE.equals(throwException)) {
-			throw new RuntimeException("由微服务提供者抛出异常，使全局事务回滚: bbb");
+			SeataUtil.print("由微服务提供者抛出异常，使全局事务回滚: insertBbb()");
+			throw new RuntimeException("由微服务提供者抛出异常，使全局事务回滚: insertBbb()");
 		}
 
+		SeataUtil.print("return bbb id");
 		return entity.getId();
 	}
 
 
 	@GetMapping("/test/delete/aaa")
 	public void deleteAaa() {
+		SeataUtil.print("delete name=aaa");
 		Map<String, Object> params = new HashMap<>();
 		params.put("name", "aaa");
 		mapper.deleteByMap(params);
@@ -61,6 +79,7 @@ public class TestAtController {
 
 	@GetMapping("/test/delete/bbb")
 	public void deleteBbb() {
+		SeataUtil.print("delete name=bbb");
 		Map<String, Object> params = new HashMap<>();
 		params.put("name", "bbb");
 		mapper.deleteByMap(params);
@@ -68,6 +87,7 @@ public class TestAtController {
 
 	@GetMapping("/test/delete")
 	public void delete(@RequestParam Long id) {
+		SeataUtil.print("delete by id: " + id);
 		mapper.deleteById(id);
 	}
 

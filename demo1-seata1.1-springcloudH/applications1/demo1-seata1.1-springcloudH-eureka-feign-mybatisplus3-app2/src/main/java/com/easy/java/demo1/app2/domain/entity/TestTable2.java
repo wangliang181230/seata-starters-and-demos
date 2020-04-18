@@ -1,4 +1,4 @@
-package com.easy.java.demo1.app1.domain.entity;
+package com.easy.java.demo1.app2.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

@@ -1,7 +1,7 @@
-package com.easy.java.demo1.app1.business.mapper;
+package com.easy.java.demo1.app2.business.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.easy.java.demo1.app1.domain.entity.TestTable2;
+import com.easy.java.demo1.app2.domain.entity.TestTable2;
 
 /**
  * @author wangliang <841369634@qq.com>

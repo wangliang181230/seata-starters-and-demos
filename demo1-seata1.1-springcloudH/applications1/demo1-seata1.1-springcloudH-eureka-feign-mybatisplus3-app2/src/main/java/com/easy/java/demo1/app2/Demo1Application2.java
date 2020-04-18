@@ -1,4 +1,4 @@
-package com.easy.java.demo1.app1;
+package com.easy.java.demo1.app2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;

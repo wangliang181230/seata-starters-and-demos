@@ -1,4 +1,4 @@
-package com.easy.java.demo1.app1.business.config;
+package com.easy.java.demo1.app2.business.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020/4/18 2:54
  */
 @Configuration(proxyBeanMethods = false)
-@MapperScan(basePackages = "com.easy.java.demo1.app1.business.mapper")
+@MapperScan(basePackages = "com.easy.java.demo1.app2.business.mapper")
 public class MyBatisPlusConfiguration {
 }
