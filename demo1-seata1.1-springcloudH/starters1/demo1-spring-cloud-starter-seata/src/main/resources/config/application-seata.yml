@@ -16,6 +16,6 @@ seata:
   #saga配置
   saga:
     state-machine:
-      enable-async: true #启用异步执行状态机（默认：false）
+      enable-async: true #允许异步执行状态机（默认：false）：即stateMachineEngine.startAsync方法可以使用了。
       application-id: ${spring.application.name:}
       tx-service-group: ${seata.tx-service-group:}
