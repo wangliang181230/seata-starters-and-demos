@@ -11,7 +11,6 @@ spring:
 seata:
   #由于此属性不支持横杆模式，所以添加以下两项配置，让它在项目中支持横杆模式配置
   enable-auto-data-source-proxy: true
-  enableAutoDataSourceProxy: ${seata.enable-auto-data-source-proxy}
 
   #saga配置
   saga:
