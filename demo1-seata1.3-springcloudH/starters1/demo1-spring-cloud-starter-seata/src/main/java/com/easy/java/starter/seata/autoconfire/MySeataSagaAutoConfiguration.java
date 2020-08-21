@@ -1,5 +1,6 @@
 package com.easy.java.starter.seata.autoconfire;
 
+import com.easy.java.common.util.ResourceUtil;
 import com.easy.java.starter.seata.properties.MySeataSagaThreadPoolProperties;
 import io.seata.saga.engine.StateMachineConfig;
 import io.seata.saga.engine.StateMachineEngine;
@@ -16,6 +17,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 
 import javax.sql.DataSource;
@@ -53,6 +55,11 @@ public class MySeataSagaAutoConfiguration {
 
         if (threadPoolExecutor != null) {
             config.setThreadPoolExecutor(threadPoolExecutor);
+        }
+
+        Resource[] resources = ResourceUtil.getResources("classpath*:statelang/*.json");
+        if (resources != null && resources.length > 0) {
+            config.setResources(resources);
         }
 
         return config;
