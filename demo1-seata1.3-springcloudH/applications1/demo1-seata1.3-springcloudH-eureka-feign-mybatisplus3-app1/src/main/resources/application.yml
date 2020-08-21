@@ -31,8 +31,8 @@ seata:
     eureka:
       service-url: ${eureka.client.service-url.defaultZone}
       application: seata-server
-  saga.enabled: true #SAGA的开关，注意：SAGA启动的话，AT必须关闭，否则无法使用SAGA
-  enable-auto-data-source-proxy: false #AT的开关，默认：true
+  enable-auto-data-source-proxy: true #AT的开关，默认：true
+  saga.enabled: false #SAGA的开关，注意：SAGA启动的话，AT必须关闭，否则无法使用SAGA
 
 
 management:
