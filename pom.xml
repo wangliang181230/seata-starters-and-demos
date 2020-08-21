@@ -10,8 +10,8 @@
 
 	<modules>
 		<module>commons</module>
-		<module>registries</module>
-		<module>demo1-seata1.1-springcloudH</module>
+		<module>registry-center</module>
+		<module>demo1-seata1.3-springcloudH</module>
 	</modules>
 
 	<build>
