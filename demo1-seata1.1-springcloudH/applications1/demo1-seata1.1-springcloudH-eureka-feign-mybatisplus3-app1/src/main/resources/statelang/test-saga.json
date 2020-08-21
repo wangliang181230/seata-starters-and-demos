@@ -9,7 +9,7 @@
 			"ServiceName": "sagaBizService1",
 			"ServiceMethod": "doBiz",
 			"CompensateState": "CompensateService1",
-			"Next": "Service2",
+			"Next": "ScriptState1",
 			"Input": [],
 			"Output": {
 				"sagaBizService1Result": "$.#root"
@@ -38,6 +38,20 @@
 				}
 			]
 		},
+		"ScriptState1": {
+			"Type": "ScriptTask",
+			"ScriptType": "groovy",
+			"ScriptContent": "return inputA ? '111' : '222'",
+			"Input": [
+				{
+					"inputA": "$.[sagaBizService1Result]"
+				}
+			],
+			"Output": {
+				"scriptStateResult": "$.#root"
+			},
+			"Next": "Service2"
+		},
 		"Service2": {
 			"Type": "ServiceTask",
 			"ServiceName": "sagaBizService2",
@@ -46,7 +60,8 @@
 			"Next": "Succeed",
 			"Input": [
 				{
-					"doThrowException": "$.[throwException]"
+					"doThrowException": "$.[throwException]",
+					"aaa": "$.[scriptStateResult]"
 				}
 			],
 			"Output": {
