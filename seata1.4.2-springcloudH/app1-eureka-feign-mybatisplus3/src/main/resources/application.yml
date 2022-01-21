@@ -25,15 +25,9 @@ seata:
   service:
     vgroup-mapping:
       test-group: seata-server
-  #eureka注册中心
-  registry:
-    type: eureka
-    eureka:
-      service-url: ${eureka.client.service-url.defaultZone}
-      application: seata-server
-  enable-auto-data-source-proxy: true #AT的开关，默认：true
-  saga.enabled: false #SAGA的开关，注意：SAGA启动的话，AT必须关闭，否则无法使用SAGA
-
+    grouplist:
+      seata-server: 192.168.101.216:7091
+  saga.enabled: true #SAGA的开关，注意：SAGA启动的话，AT必须关闭，否则无法使用SAGA
 
 management:
   server.port: 1${server.port:8080}

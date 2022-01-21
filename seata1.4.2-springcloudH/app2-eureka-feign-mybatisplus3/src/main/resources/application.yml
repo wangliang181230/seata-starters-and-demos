@@ -25,12 +25,8 @@ seata:
   service:
     vgroup-mapping:
       test-group: seata-server
-
-  #eureka注册中心
-  registry:
-    type: eureka
-    eureka:
-      service-url: ${eureka.client.service-url.defaultZone}
+    grouplist:
+      seata-server: 192.168.101.216:7091
 
 management:
   server.port: 1${server.port:8080}

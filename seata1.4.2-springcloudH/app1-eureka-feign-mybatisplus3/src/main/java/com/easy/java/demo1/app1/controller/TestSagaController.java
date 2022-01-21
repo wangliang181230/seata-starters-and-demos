@@ -28,7 +28,7 @@ public class TestSagaController {
 	@GetMapping("/success")
 	public String testSuccess() {
 		if (stateMachineEngine == null) {
-			return "请先启用SAGA模式并禁用AT模式";
+			return "请先启用SAGA模式";
 		}
 
 		String stateMachineName = "testSaga"; // 对应statelang/test-saga.json里的"Name"的值。
