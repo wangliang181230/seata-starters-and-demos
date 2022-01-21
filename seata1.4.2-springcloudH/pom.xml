@@ -26,6 +26,18 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- seata -->
+			<dependency>
+				<groupId>io.seata</groupId>
+				<artifactId>seata-all</artifactId>
+				<version>${seata.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.seata</groupId>
+				<artifactId>seata-spring-boot-starter</artifactId>
+				<version>${seata.version}</version>
+			</dependency>
+
 			<!-- spring-cloud -->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>

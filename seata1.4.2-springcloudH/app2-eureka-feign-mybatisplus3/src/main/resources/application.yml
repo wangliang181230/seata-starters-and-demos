@@ -31,7 +31,6 @@ seata:
     type: eureka
     eureka:
       service-url: ${eureka.client.service-url.defaultZone}
-      application: seata-server
 
 management:
   server.port: 1${server.port:8080}
