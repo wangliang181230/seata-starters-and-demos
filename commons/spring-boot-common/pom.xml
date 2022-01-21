@@ -12,7 +12,7 @@
 
 	<properties>
 		<!--spring-boot-->
-		<spring-boot.version>2.3.1.RELEASE</spring-boot.version>
+		<spring-boot.version>2.3.12.RELEASE</spring-boot.version>
 	</properties>
 
 	<dependencies>

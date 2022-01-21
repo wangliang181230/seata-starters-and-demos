@@ -8,7 +8,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>demo1-seata1.3-springcloudH</artifactId>
+	<artifactId>demo1-seata1.4.2-springcloudH</artifactId>
 	<packaging>pom</packaging>
 
 	<modules>

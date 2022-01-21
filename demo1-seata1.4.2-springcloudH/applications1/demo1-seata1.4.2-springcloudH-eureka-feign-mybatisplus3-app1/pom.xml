@@ -4,16 +4,16 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.1.RELEASE</version>
+		<version>2.3.12.RELEASE</version>
 		<relativePath/>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>demo1-seata1.3-springcloudH-eureka-feign-mybatisplus3-app2</artifactId>
+	<artifactId>demo1-seata1.4.2-springcloudH-eureka-feign-mybatisplus3-app1</artifactId>
 
 	<properties>
 		<!--spring-cloud-->
-		<spring-cloud-dependencies.version>Hoxton.SR3</spring-cloud-dependencies.version>
+		<spring-cloud-dependencies.version>Hoxton.SR12</spring-cloud-dependencies.version>
 
 		<!--mybatis-plus-->
 		<mybatis-plus.version>3.3.1</mybatis-plus.version>

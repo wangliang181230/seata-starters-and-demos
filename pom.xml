@@ -11,7 +11,7 @@
 	<modules>
 		<module>commons</module>
 		<module>registry-center</module>
-		<module>demo1-seata1.3-springcloudH</module>
+		<module>demo1-seata1.4.2-springcloudH</module>
 	</modules>
 
 	<build>
