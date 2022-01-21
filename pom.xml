@@ -9,26 +9,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>commons</module>
-		<module>registry-center</module>
-		<module>demo1-seata1.4.2-springcloudH</module>
+		<module>seata1.4.2-springcloudH</module>
 	</modules>
-
-	<build>
-		<!--插件管理-->
-		<pluginManagement>
-			<plugins>
-				<!--JAVA代码编译插件-->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 </project>
