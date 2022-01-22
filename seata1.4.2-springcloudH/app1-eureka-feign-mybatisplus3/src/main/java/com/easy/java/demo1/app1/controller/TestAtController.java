@@ -4,8 +4,10 @@ import com.easy.java.demo1.app1.business.mapper.TestTable1Mapper;
 import com.easy.java.demo1.app1.consumer.Demo1Application2AtControllerFeignClient;
 import com.easy.java.demo1.app1.domain.entity.TestTable1;
 import com.easy.java.starter.seata.util.SeataUtil;
+import io.seata.spring.annotation.GlobalLock;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +40,23 @@ public class TestAtController {
 		feignClient.insertBbb(false);
 
 		return "测试成功";
+	}
+
+	/**
+	 * 该方法没有纳入全局事务的管理，
+	 * 所以需要添加 @GlobalLock + @Transactional + select for update 来保证数据不被脏写。
+	 *
+	 * @param id
+	 * @return
+	 */
+	@GlobalLock
+	@Transactional
+	@GetMapping("/test2")
+	public String test2(String id) {
+		TestTable1 entity = mapper.selectByIdForUpdate(id);
+		entity.setName("222324234");
+		mapper.updateById(entity);
+		return "测试更新成功";
 	}
 
 	@GlobalTransactional

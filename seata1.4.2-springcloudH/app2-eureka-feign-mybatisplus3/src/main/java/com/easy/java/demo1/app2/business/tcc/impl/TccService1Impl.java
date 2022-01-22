@@ -19,9 +19,9 @@ public class TccService1Impl implements TccService1 {
 
 	@Override
 	@Transactional // 一般情况下，此方法上会加本地事务，用于控制当前方法的事务一致性
-	public synchronized void doBiz(BusinessActionContext businessActionContext,
-								   long payMoney,
-								   boolean throwException) {
+	public synchronized void try1(BusinessActionContext businessActionContext,
+								  long payMoney,
+								  boolean throwException) {
 		// 理论上，这里要对业务资源数据进行校验，并对资源进行预留操作，达到事务隔离性的目的。
 		SeataUtil.print("tcc service1 do biz: ");
 
@@ -52,7 +52,7 @@ public class TccService1Impl implements TccService1 {
 	 * @return
 	 */
 	@Override
-	public synchronized boolean commit1(BusinessActionContext businessActionContext) {
+	public synchronized boolean confirm1(BusinessActionContext businessActionContext) {
 		// 消费预留的资源：整个事务成功，将上面冻结了的需支付金额真正扣除
 		long payMoney = Long.valueOf(String.valueOf(businessActionContext.getActionContext("payMoney")));
 
@@ -80,7 +80,7 @@ public class TccService1Impl implements TccService1 {
 	 * @return
 	 */
 	@Override
-	public synchronized boolean rollback1(BusinessActionContext businessActionContext) {
+	public synchronized boolean cancel1(BusinessActionContext businessActionContext) {
 		// 事务回滚，将之前冻结的需支付金额恢复到余额中。
 		// 注意：我这里写的比较简单，实际上这里还需要判断doBiz是否成功过，上面抛异常位置实际上是业务执行完后抛的，是需要回滚的，
 		//       假如在执行业务之前就抛了异常，那么这里实际上是不需要任何操作的。也就是允许空回滚。

@@ -22,12 +22,12 @@ public class TestTccController {
 
 	@GetMapping("/dobiz/success")
 	public void doBizSuccess(@RequestParam Long payMoney) {
-		tccService1.doBiz(null, payMoney, false);
+		tccService1.try1(null, payMoney, false);
 	}
 
 	@GetMapping("/dobiz/error")
 	public void doBizError(@RequestParam Long payMoney) {
-		tccService1.doBiz(null, payMoney, true);
+		tccService1.try1(null, payMoney, true);
 	}
 
 }

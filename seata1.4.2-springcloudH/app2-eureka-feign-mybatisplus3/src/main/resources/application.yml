@@ -22,6 +22,7 @@ spring:
 
 seata:
   tx-service-group: test-group
+  #data-source-proxy-mode: XA
   service:
     vgroup-mapping:
       test-group: seata-server1
