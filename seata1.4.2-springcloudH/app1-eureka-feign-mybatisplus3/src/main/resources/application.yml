@@ -24,9 +24,9 @@ seata:
   tx-service-group: test-group
   service:
     vgroup-mapping:
-      test-group: seata-server
+      test-group: seata-server1
     grouplist:
-      seata-server: 192.168.101.216:7091
+      seata-server1: 192.168.101.216:8091
   saga:
     enabled: true #SAGA的开关，注意：SAGA启动的话，AT必须关闭，否则无法使用SAGA
     state-machine:

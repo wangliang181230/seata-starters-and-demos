@@ -24,9 +24,9 @@ seata:
   tx-service-group: test-group
   service:
     vgroup-mapping:
-      test-group: seata-server
+      test-group: seata-server1
     grouplist:
-      seata-server: 192.168.101.216:7091
+      seata-server1: 192.168.101.216:8091
 
 management:
   server.port: 1${server.port:8080}
