@@ -1,6 +1,7 @@
 # Auto Configuration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.easy.java.starter.seata.autoconfire.MySeataSagaAutoConfiguration
+com.easy.java.starter.seata.autoconfire.MySeataSagaAutoConfiguration,\
+com.easy.java.starter.seata.autoconfire.MyCloudAutoConfiguration
 #
 # Environment Post Processors
 org.springframework.boot.env.EnvironmentPostProcessor=\
